@@ -66,18 +66,18 @@ public class GameManager : MonoBehaviour
             GameObject chessPieceClicked = selectedObject;
 
             if (hit.collider != null && hit.collider.name != "GreenSpot(Clone)" && hit.collider.name != "ChessSpot(Clone)") {
-                chessPieceClicked = hit.collider.gameObject;
+                chessPieceClicked = hit.collider.gameObject; // stores the last chess piece clicked into a variable
             }
 
             if (hit.collider != null) { 
-                selectedObjectName = hit.collider.name; // store the object that the ray hits into a variable
-                selectedObject = hit.collider.gameObject;
+                selectedObjectName = hit.collider.name; 
+                selectedObject = hit.collider.gameObject; // store the object that the ray hits into a variable
 
                 greenSpot.transform.position = selectedObject.transform.position;
             }
 
             if (hit.collider != null && hit.collider.name == "GreenSpot(Clone)") {
-                chessPieceClicked.transform.position = hit.collider.transform.position;
+                chessPieceClicked.transform.position = hit.collider.transform.position; // Moves the chesspiece to the spot that is clicked
 
                 pawn_Placement.DestroyGreenSpots();
                 GameObject.Find("selectionSpot").transform.position = new Vector2(20, 20);
