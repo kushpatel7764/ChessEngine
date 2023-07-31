@@ -25,6 +25,24 @@ public class GameManager : MonoBehaviour
         }
         return null; 
     }
+    
+    private void TurnSystem(char alternate) { 
+        //Alternate is either B(Black) or W(White)
+        foreach (GameObject obj in allGameObjects) {
+            if (obj.GetComponent<CircleCollider2D>()) {
+                //disable blackPieces first 
+                string pieceColor = obj.tag;  
+                if (pieceColor[0] == alternate){ // if black (could be white as well) 
+                    obj.GetComponent<CircleCollider2D>().enabled = false;
+                }else{
+                    obj.GetComponent<CircleCollider2D>().enabled = true; 
+                }
+               
+                
+
+            } else { continue; }
+        } 
+    }
 
     private void Awake() {
         pawnPlacementObject = GameObject.Find("GameManager");
@@ -75,12 +93,22 @@ public class GameManager : MonoBehaviour
 
                 greenSpot.transform.position = selectedObject.transform.position;
             }
-
+            
             if (hit.collider != null && hit.collider.name == "GreenSpot(Clone)") {
                 chessPieceClicked.transform.position = hit.collider.transform.position;
 
                 pawn_Placement.DestroyGreenSpots();
                 GameObject.Find("selectionSpot").transform.position = new Vector2(20, 20);
+
+                //Change Turns depending on the starter player. First to move a piece is first and then eveything alternates from there. 
+                string tagOfClickedPiece = chessPieceClicked.tag; 
+                if (tagOfClickedPiece[0] == 'B'){
+                    //Alternate gets disables so if black moves then black should be the one to be disabled 
+                    TurnSystem('B');
+                } else{
+                    TurnSystem('W');
+                }
+
             }
         }
     }
