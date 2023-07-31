@@ -5,6 +5,21 @@ using UnityEngine;
 public class CreateBoard : MonoBehaviour
 {
     public GameObject chessSpot;
+
+    public GameObject b_Horse;
+    public GameObject b_Rook;
+    public GameObject b_Queen;
+    public GameObject b_King;
+    public GameObject b_Pawn;
+    public GameObject b_Bishop;
+
+    public GameObject w_Horse;
+    public GameObject w_Rook;
+    public GameObject w_Queen;
+    public GameObject w_King;
+    public GameObject w_Pawn;
+    public GameObject w_Bishop;
+        
     int heightPiece = 1;
     int widthPiece = 1; 
     int heightBoard = 1*8;
@@ -20,26 +35,45 @@ public class CreateBoard : MonoBehaviour
                     if (k % 2 == 0){
                       chessSpot.GetComponent<SpriteRenderer>().color = Color.white;
                     }else{
-                      chessSpot.GetComponent<SpriteRenderer>().color = Color.black;
+                      chessSpot.GetComponent<SpriteRenderer>().color = Color.gray;
                     }
                 } else{
                     if (k % 2 == 0){
-                      chessSpot.GetComponent<SpriteRenderer>().color = Color.black;
+                      chessSpot.GetComponent<SpriteRenderer>().color = Color.gray;
                     }else{
                       chessSpot.GetComponent<SpriteRenderer>().color = Color.white;
                     }
                 }
-                
-               
+
                 Instantiate(chessSpot, new Vector2(k,i), Quaternion.identity, this.transform);
             }
         }
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+        Instantiate(w_Rook, new Vector2(0, 0), Quaternion.identity, this.transform);
+        Instantiate(w_Horse, new Vector2(1, 0), Quaternion.identity, this.transform);
+        Instantiate(w_Bishop, new Vector2(2, 0), Quaternion.identity, this.transform);
+        Instantiate(w_Queen, new Vector2(3, 0), Quaternion.identity, this.transform);
+        Instantiate(w_King, new Vector2(4, 0), Quaternion.identity, this.transform);
+        Instantiate(w_Bishop, new Vector2(5, 0), Quaternion.identity, this.transform);
+        Instantiate(w_Horse, new Vector2(6, 0), Quaternion.identity, this.transform);
+        Instantiate(w_Rook, new Vector2(7, 0), Quaternion.identity, this.transform);
+
+        Instantiate(b_Rook, new Vector2(0, 7), Quaternion.identity, this.transform);
+        Instantiate(b_Horse, new Vector2(1, 7), Quaternion.identity, this.transform);
+        Instantiate(b_Bishop, new Vector2(2, 7), Quaternion.identity, this.transform);
+        Instantiate(b_Queen, new Vector2(3, 7), Quaternion.identity, this.transform);
+        Instantiate(b_King, new Vector2(4, 7), Quaternion.identity, this.transform);
+        Instantiate(b_Bishop, new Vector2(5, 7), Quaternion.identity, this.transform);
+        Instantiate(b_Horse, new Vector2(6, 7), Quaternion.identity, this.transform);
+        Instantiate(b_Rook, new Vector2(7, 7), Quaternion.identity, this.transform);
+
+        for (var i = 0; i < 8; i++) {
+            var newWPawn = Instantiate(w_Pawn, new Vector2(i, 1), Quaternion.identity, this.transform);
+            var newBPawn = Instantiate(b_Pawn, new Vector2(i,6), Quaternion.identity, this.transform);
+
+            newBPawn.name = "BPawn" + i;
+            newWPawn.name = "WPawn" + i;
+        }
     
+    }    
 }
