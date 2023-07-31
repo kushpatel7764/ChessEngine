@@ -4,10 +4,11 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Black
-  - White
   - GreenSpot
   - ChessSpot
+  - BlackPawn
+  - WhitePawn
+  - White
   layers:
   - Default
   - TransparentFX

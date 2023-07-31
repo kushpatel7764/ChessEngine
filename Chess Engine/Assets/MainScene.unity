@@ -201,6 +201,7 @@ GameObject:
   m_Component:
   - component: {fileID: 507836155}
   - component: {fileID: 507836154}
+  - component: {fileID: 507836156}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -220,7 +221,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 193e25c55bfa53b448f2a8aca3eed142, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedObject: 0
+  greenSpotPrefab: {fileID: 284916834088767904, guid: f5eb2db7ae292084bb1bbe3e44fe5f84, type: 3}
+  greenSpot: {fileID: 0}
+  selectedObject: {fileID: 0}
+  selectedObjectName: 
 --- !u!4 &507836155
 Transform:
   m_ObjectHideFlags: 0
@@ -236,6 +240,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &507836156
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 507836153}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c515b861a83ce874e90d47bfd674ed75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  greenSpot: {fileID: 284916834088767904, guid: f5eb2db7ae292084bb1bbe3e44fe5f84, type: 3}
+  gameManagerObject: {fileID: 0}
 --- !u!1 &1378611707
 GameObject:
   m_ObjectHideFlags: 0
