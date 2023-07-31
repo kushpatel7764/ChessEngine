@@ -18,6 +18,11 @@ public class Pawn_Placement : MonoBehaviour
     public void DestroyGreenSpots() { //Destroys all the green Spots in the scene
         allGameObjects = GameObject.FindObjectsOfType<GameObject>();
 
+        /*
+         * Loop through all game objects if there is a green spot in the scene.
+         * when ever the object land on a object with the greenspot name it destroys the object 
+         */
+
         if (GameObject.Find("GreenSpot(Clone)")) {
             foreach (GameObject obj in allGameObjects) {
                 if (obj.name == "GreenSpot(Clone)") {
@@ -32,8 +37,8 @@ public class Pawn_Placement : MonoBehaviour
 
     private GameObject ChessPieceIdentifier(Vector3 location) {
         foreach (GameObject obj in allGameObjects) {
-            if ((obj.name != "ChessSpot(Clone)") && (obj.name != "GreenSpot(Clone)")) {
-                if (obj.transform.position == location) {
+            if ((obj.name != "ChessSpot(Clone)") && (obj.name != "GreenSpot(Clone)")) { // if object isnt a chess spot or green spot then it is a chess piece
+                if (obj.transform.position == location) { // if the object in the loop has the same coordinates that are given in the parameters then it returns the object
                     return obj;
                 }
             }
@@ -46,22 +51,22 @@ public class Pawn_Placement : MonoBehaviour
         if (type == "Black") {
             
             for (var i = 0; i < moves; i++) {
-                Instantiate(greenSpot, new Vector2(pawnPosition.x, pawnPosition.y - i), Quaternion.identity);
+                Instantiate(greenSpot, new Vector2(pawnPosition.x, pawnPosition.y - i), Quaternion.identity); //create the green spots that appear when you click on the pawn
             }
 
-            if (ChessPieceIdentifier(new Vector3(pawnPosition.x + 1, pawnPosition.y - 1)) != null) {
-                var redSpot = Instantiate(greenSpot, new Vector3(pawnPosition.x + 1, pawnPosition.y - 1, 0), Quaternion.identity);
+            if (ChessPieceIdentifier(new Vector3(pawnPosition.x + 1, pawnPosition.y - 1)) != null) { // This is what creates the spots that indicate a kill
+                var redSpot = Instantiate(greenSpot, new Vector3(pawnPosition.x + 1, pawnPosition.y - 1, 0), Quaternion.identity); 
 
                 redSpot.GetComponent<SpriteRenderer>().color = Color.red;
             }
-            if (ChessPieceIdentifier(new Vector3(pawnPosition.x - 1, pawnPosition.y - 1)) != null) {
+            if (ChessPieceIdentifier(new Vector3(pawnPosition.x - 1, pawnPosition.y - 1)) != null) { 
                 var redSpot = Instantiate(greenSpot, new Vector3(pawnPosition.x - 1, pawnPosition.y - 1, 0), Quaternion.identity);
 
                 redSpot.GetComponent<SpriteRenderer>().color = Color.red;
             }
         } 
 
-        if (type == "White") {
+        if (type == "White") { // The white pieces
             
             for (var i = 0; i < moves; i++) {
                 Instantiate(greenSpot, new Vector2(pawnPosition.x, pawnPosition.y + i), Quaternion.identity);
