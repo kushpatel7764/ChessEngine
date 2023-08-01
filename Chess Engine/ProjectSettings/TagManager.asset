@@ -9,6 +9,16 @@ TagManager:
   - BlackPawn
   - WhitePawn
   - White
+  - WhiteRook
+  - BlackRook
+  - WhiteHorse
+  - BlackHorse
+  - WhiteBishop
+  - BlackBishop
+  - BlackKing
+  - WhiteKing
+  - BlackQueen
+  - WhiteQueen
   layers:
   - Default
   - TransparentFX

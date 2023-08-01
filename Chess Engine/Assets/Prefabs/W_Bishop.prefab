@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 63245629079166508}
   m_Layer: 0
   m_Name: W_Bishop
-  m_TagString: Untagged
+  m_TagString: WhiteBishop
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
