@@ -26,6 +26,18 @@ public class GameManager : MonoBehaviour
         return null; 
     }
 
+    public GameObject ChessPieceIdentifier(Vector3 location) {
+        foreach (GameObject obj in allGameObjects) {
+            if ((obj.name != "ChessSpot(Clone)") && (obj.name != "GreenSpot(Clone)")) { // if object isnt a chess spot or green spot then it is a chess piece
+                if (obj.transform.position == location) { // if the object in the loop has the same coordinates that are given in the parameters then it returns the object
+                    return obj;
+                }
+            }
+        }
+
+        return null;
+    }
+
     private void Awake() {
         pawnPlacementObject = GameObject.Find("GameManager");
         pawn_Placement = pawnPlacementObject.GetComponent<Pawn_Placement>();
@@ -77,6 +89,15 @@ public class GameManager : MonoBehaviour
             }
 
             if (hit.collider != null && hit.collider.name == "GreenSpot(Clone)") {
+                Vector3 chessPiecePosition = hit.collider.transform.position;
+                if (ChessPieceIdentifier(new Vector3(chessPiecePosition.x + 1, chessPiecePosition.y - 1, 0)) != null) {
+
+                    if (chessPiecePosition == ChessPieceIdentifier(new Vector3(chessPiecePosition.x + 1, chessPiecePosition.y - 1, 0)).transform.position) {
+                        Destroy(ChessPieceIdentifier(new Vector3(chessPiecePosition.x + 1, chessPiecePosition.y - 1, 0)));
+                    }
+                }
+
+
                 chessPieceClicked.transform.position = hit.collider.transform.position; // Moves the chesspiece to the spot that is clicked
 
                 pawn_Placement.DestroyGreenSpots();
