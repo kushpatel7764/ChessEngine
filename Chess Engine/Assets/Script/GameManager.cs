@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.CompilerServices;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -12,21 +14,22 @@ public class GameManager : MonoBehaviour
     GameObject pawnPlacementObject;
 
     private GameObject[] allGameObjects;
-    private List<GameObject> chessSpotArray = new List<GameObject>();
 
-    public GameObject selectedObject;
-    public string selectedObjectName;
+    public GameObject selectedGameObject;
 
-    private GameObject ChessSpot(int x, int y) { // returns the exact chessSpot that is in the given coordinates
-        foreach (GameObject obj in chessSpotArray) {
-            if (obj.transform.position.x == x && obj.transform.position.y == y) {
-                return obj;
-            } else { continue; }
-        }
-        return null; 
+    string selectionSpotName = "SelectionSpot";
+    string greenSpotName = "GreenSpot(Clone)";
+
+    private bool IsChessPiece(GameObject obj) {
+
+        if (obj.tag.StartsWith("B") == true || obj.tag.StartsWith("W") == true) {
+            return true;
+        } else { return false; }
     }
-    
-    private void TurnSystem(char alternate) { 
+
+    private void TurnSystem(char alternate) {
+        allGameObjects = GameObject.FindObjectsOfType<GameObject>();
+
         //Alternate is either B(Black) or W(White)
         foreach (GameObject obj in allGameObjects) {
             if (obj.GetComponent<CircleCollider2D>()) {
@@ -44,10 +47,12 @@ public class GameManager : MonoBehaviour
         } 
     }
 
-    public GameObject ChessPieceIdentifier(Vector3 location) {
+    public GameObject LocateChessPieceAt(Vector3 location) {
+        allGameObjects = GameObject.FindObjectsOfType<GameObject>();
+
         foreach (GameObject obj in allGameObjects) {
-            if ((obj.name != "ChessSpot(Clone)") && (obj.name != "GreenSpot(Clone)")) { // if object isnt a chess spot or green spot then it is a chess piece
-                if (obj.transform.position == location) { // if the object in the loop has the same coordinates that are given in the parameters then it returns the object
+            if (IsChessPiece(obj)) { 
+                if (obj.transform.position == location) { 
                     return obj;
                 }
             }
@@ -59,77 +64,60 @@ public class GameManager : MonoBehaviour
     private void Awake() {
         pawnPlacementObject = GameObject.Find("GameManager");
         pawn_Placement = pawnPlacementObject.GetComponent<Pawn_Placement>();
-    }
 
-    private void Start() {
         greenSpot = Instantiate(greenSpotPrefab, new Vector2(20, 20), Quaternion.identity);
-        greenSpot.name = "selectionSpot";
-
-
+        greenSpot.name = selectionSpotName;
+        greenSpot.tag = selectionSpotName;
     }
 
     void Update()
     {
-        /*
-         * Create a array with every single chessSpot
-         * Creates a ray that will detect what gameObject is pressed and returns the name of the Object
-         * Manages the selection of Game Pieces
-         */
-
-        allGameObjects = GameObject.FindObjectsOfType<GameObject>();
-
-        //Creating a array of all the ChessSpots
-        foreach (GameObject obj in allGameObjects) {
-            
-            if (obj.name == "ChessSpot(Clone)") {
-                chessSpotArray.Add(obj); 
-                if (chessSpotArray.Count == 64) {
-                    break;
-                }
-            }
-        }
 
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction);
+        RaycastHit2D hitByRay = Physics2D.Raycast(ray.origin, ray.direction);
         
         if (Input.GetMouseButtonDown(0)) {
-            GameObject chessPieceClicked = selectedObject;
 
-            if (hit.collider != null && hit.collider.name != "GreenSpot(Clone)" && hit.collider.name != "ChessSpot(Clone)") {
-                chessPieceClicked = hit.collider.gameObject; // stores the last chess piece clicked into a variable
-            }
-
-            if (hit.collider != null) { 
-                selectedObjectName = hit.collider.name; 
-                selectedObject = hit.collider.gameObject; // store the object that the ray hits into a variable
-
-                greenSpot.transform.position = selectedObject.transform.position;
-            }
+            GameObject lastChessPieceClicked = selectedGameObject;
             
-            if (hit.collider != null && hit.collider.name == "GreenSpot(Clone)") {
-                Vector3 chessPiecePosition = hit.collider.transform.position;
-                if (ChessPieceIdentifier(new Vector3(chessPiecePosition.x + 1, chessPiecePosition.y - 1, 0)) != null) {
+            if (hitByRay.collider != null) {   // Detect the ray hit a object with a collider
 
-                    if (chessPiecePosition == ChessPieceIdentifier(new Vector3(chessPiecePosition.x + 1, chessPiecePosition.y - 1, 0)).transform.position) {
-                        Destroy(ChessPieceIdentifier(new Vector3(chessPiecePosition.x + 1, chessPiecePosition.y - 1, 0)));
+                var ColliderhitByRay = hitByRay.collider;
+
+                selectedGameObject = ColliderhitByRay.gameObject; // store the object that the ray hits into a variable
+                greenSpot.transform.position = selectedGameObject.transform.position; // creates the green block under the chess piece
+
+                bool isKillSpot = ColliderhitByRay.GetComponent<SpriteRenderer>().color == Color.red;
+
+                if (isKillSpot) { //Killing the pieces
+                    GameObject killSpot = ColliderhitByRay.gameObject;
+                    GameObject pieceToKill = LocateChessPieceAt(killSpot.transform.position);
+
+                    Destroy(pieceToKill);
+                }
+
+                if (IsChessPiece(ColliderhitByRay.gameObject)) {
+                    lastChessPieceClicked = ColliderhitByRay.gameObject; 
+                }
+
+                if (ColliderhitByRay.name == greenSpotName) {
+                    // If the ray is a greenSpot
+                    
+                    lastChessPieceClicked.transform.position = ColliderhitByRay.transform.position; // Moves the chesspiece to the spot that is clicked
+
+                    pawn_Placement.DestroyGreenSpots(); 
+                    GameObject.Find(selectionSpotName).transform.position = new Vector2(20, 20); //Move the selection spot out of the scene
+
+                    //Change Turns depending on the starter player. First to move a piece is first and then eveything alternates from there. 
+                    string tagOfClickedPiece = lastChessPieceClicked.tag;
+                    if (tagOfClickedPiece[0] == 'B') {
+                        //Alternate gets disables so if black moves then black should be the one to be disabled 
+                        TurnSystem('B');
+
+                    } else {
+                        TurnSystem('W');
                     }
                 }
-
-
-                chessPieceClicked.transform.position = hit.collider.transform.position; // Moves the chesspiece to the spot that is clicked
-
-                pawn_Placement.DestroyGreenSpots();
-                GameObject.Find("selectionSpot").transform.position = new Vector2(20, 20);
-
-                //Change Turns depending on the starter player. First to move a piece is first and then eveything alternates from there. 
-                string tagOfClickedPiece = chessPieceClicked.tag; 
-                if (tagOfClickedPiece[0] == 'B'){
-                    //Alternate gets disables so if black moves then black should be the one to be disabled 
-                    TurnSystem('B');
-                } else{
-                    TurnSystem('W');
-                }
-
             }
         }
     }

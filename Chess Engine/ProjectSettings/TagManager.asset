@@ -19,6 +19,7 @@ TagManager:
   - WhiteKing
   - BlackQueen
   - WhiteQueen
+  - SelectionSpot
   layers:
   - Default
   - TransparentFX
