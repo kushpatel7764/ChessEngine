@@ -205,6 +205,8 @@ GameObject:
   - component: {fileID: 507836157}
   - component: {fileID: 507836158}
   - component: {fileID: 507836159}
+  - component: {fileID: 507836160}
+  - component: {fileID: 507836161}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -292,12 +294,39 @@ MonoBehaviour:
   m_GameObject: {fileID: 507836153}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7c54c2646d1900041bea99fe526f263d, type: 3}
+  m_Script: {fileID: 11500000, guid: 5f30df0a9fbfb4827a3549d730dab8f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   movementSpot: {fileID: 284916834088767904, guid: f5eb2db7ae292084bb1bbe3e44fe5f84, type: 3}
   gameManager: {fileID: 507836154}
-  currentlySelectedObject: {fileID: 0}
+--- !u!114 &507836160
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 507836153}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87f5237c340bd494db96c59b7f89e1d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movementSpot: {fileID: 284916834088767904, guid: f5eb2db7ae292084bb1bbe3e44fe5f84, type: 3}
+  gameManager: {fileID: 507836154}
+--- !u!114 &507836161
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 507836153}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c54cd42ad0904c65b895efdf4acec62, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movementSpot: {fileID: 284916834088767904, guid: f5eb2db7ae292084bb1bbe3e44fe5f84, type: 3}
+  gameManager: {fileID: 507836154}
 --- !u!1 &1378611707
 GameObject:
   m_ObjectHideFlags: 0
