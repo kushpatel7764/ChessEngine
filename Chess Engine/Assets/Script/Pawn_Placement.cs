@@ -12,8 +12,7 @@ public class Pawn_Placement : MonoBehaviour
 
     public GameObject movementBlock;
 
-    GameManager gameManager;
-    [SerializeField] GameObject gameManagerObject;
+    [SerializeField] GameManager gameManager;
 
     public void DestroyGreenSpots() { //Destroys all the green Spots in the scene
         allGameObjects = GameObject.FindObjectsOfType<GameObject>();
@@ -54,6 +53,11 @@ public class Pawn_Placement : MonoBehaviour
         if (type == "White") { // The white pieces
             
             for (var i = 1; i < moves; i++) {
+
+                if ((gameManager.LocateChessPieceAt(new Vector3(pawnPosition.x, pawnPosition.y + i, 0)) != null) && (gameManager.LocateChessPieceAt(new Vector3(pawnPosition.x, pawnPosition.y + i, 0)).tag.StartsWith("B") == true || gameManager.LocateChessPieceAt(new Vector3(pawnPosition.x, pawnPosition.y + i, 0)).tag.StartsWith("W") == true)) {
+                    break;
+                }
+
                 Instantiate(movementBlock, new Vector2(pawnPosition.x, pawnPosition.y + i), Quaternion.identity);
             }
 
@@ -70,13 +74,6 @@ public class Pawn_Placement : MonoBehaviour
 
         } 
         
-    }
-
-
-
-    private void Awake() { //Assign the GameManager Component and Object
-        gameManagerObject = GameObject.Find("GameManager");
-        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
     private void Update() {

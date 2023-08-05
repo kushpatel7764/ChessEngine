@@ -20,6 +20,21 @@ public class GameManager : MonoBehaviour
     string selectionSpotName = "SelectionSpot";
     string greenSpotName = "GreenSpot(Clone)";
 
+    public void DestroyGreenSpots() { //Destroys all the green Spots in the scene
+        allGameObjects = GameObject.FindObjectsOfType<GameObject>();
+
+        if (GameObject.Find("GreenSpot(Clone)")) {
+            foreach (GameObject obj in allGameObjects) {
+                if (obj.tag == "GreenSpot") {
+                    Destroy(obj);
+                }
+                if (!GameObject.Find("GreenSpot(Clone)")){
+                    break;
+                }
+            }
+        }
+    }
+
     private bool IsChessPiece(GameObject obj) {
 
         if (obj.tag.StartsWith("B") == true || obj.tag.StartsWith("W") == true) {
@@ -84,7 +99,7 @@ public class GameManager : MonoBehaviour
 
                 var ColliderhitByRay = hitByRay.collider;
 
-                selectedGameObject = ColliderhitByRay.gameObject; // store the object that the ray hits into a variable
+                selectedGameObject = ColliderhitByRay.gameObject; // The object that the ray hits
                 greenSpot.transform.position = selectedGameObject.transform.position; // creates the green block under the chess piece
 
                 bool isKillSpot = ColliderhitByRay.GetComponent<SpriteRenderer>().color == Color.red;

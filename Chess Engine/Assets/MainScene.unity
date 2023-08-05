@@ -202,6 +202,9 @@ GameObject:
   - component: {fileID: 507836155}
   - component: {fileID: 507836154}
   - component: {fileID: 507836156}
+  - component: {fileID: 507836157}
+  - component: {fileID: 507836158}
+  - component: {fileID: 507836159}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -222,7 +225,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   greenSpotPrefab: {fileID: 284916834088767904, guid: f5eb2db7ae292084bb1bbe3e44fe5f84, type: 3}
-  greenSpotScript: {fileID: 1748904903}
   selectedGameObject: {fileID: 0}
 --- !u!4 &507836155
 Transform:
@@ -252,8 +254,50 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementBlock: {fileID: 284916834088767904, guid: f5eb2db7ae292084bb1bbe3e44fe5f84, type: 3}
-  greenSpotScript: {fileID: 1748904903}
-  gameManagerObject: {fileID: 1748904902}
+  gameManager: {fileID: 507836154}
+--- !u!114 &507836157
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 507836153}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36c5cceff9623b44a9ad3433cce6c5c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movementSpot: {fileID: 284916834088767904, guid: f5eb2db7ae292084bb1bbe3e44fe5f84, type: 3}
+  gameManager: {fileID: 507836154}
+--- !u!114 &507836158
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 507836153}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e873e039a74ade4ca1ecb0512c7d91d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movementSpot: {fileID: 284916834088767904, guid: f5eb2db7ae292084bb1bbe3e44fe5f84, type: 3}
+  gameManager: {fileID: 507836154}
+--- !u!114 &507836159
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 507836153}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c54c2646d1900041bea99fe526f263d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movementSpot: {fileID: 284916834088767904, guid: f5eb2db7ae292084bb1bbe3e44fe5f84, type: 3}
+  gameManager: {fileID: 507836154}
+  currentlySelectedObject: {fileID: 0}
 --- !u!1 &1378611707
 GameObject:
   m_ObjectHideFlags: 0
@@ -403,48 +447,3 @@ MonoBehaviour:
   w_King: {fileID: 1954592543366920707, guid: 532b78dc93129324ab63a429b97d7a5e, type: 3}
   w_Pawn: {fileID: 837101903771793577, guid: 289863ca80a0817469484101b47fa20a, type: 3}
   w_Bishop: {fileID: 5674494942049599223, guid: 99c817b0a9b1f5046bebbe908c30f641, type: 3}
---- !u!1 &1748904902
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1748904904}
-  - component: {fileID: 1748904903}
-  m_Layer: 0
-  m_Name: GreenSpot
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1748904903
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1748904902}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eff8e59a6432b22458f22ca33c4f0334, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gameManager: {fileID: 507836154}
---- !u!4 &1748904904
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1748904902}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.585892, y: 0.7110226, z: -0.011903353}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
