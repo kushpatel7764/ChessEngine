@@ -8,7 +8,8 @@ public class CheckSystem : MonoBehaviour
 
     private GameObject GetKing(string type) {
         switch (type) {
-            case "Black":  print("Type"); break;
+            case "Black": return GameObject.FindGameObjectWithTag("BlackKing"); 
+            case "White": return GameObject.FindGameObjectWithTag("WhiteKing"); 
         }
 
         return null;
