@@ -2,21 +2,35 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CheckSystem : MonoBehaviour
-{
-    GameManager gameManager;
+public class CheckSystem : MonoBehaviour {
+    public GameManager gameManager;
+    GameObject[] allGameObjects;
+    public string currentTurn;
 
-    private GameObject GetKing(string type) {
+    public GameObject GetKing(string type) {
         switch (type) {
-            case "Black":  print("Type"); break;
+            case "Black": return GameObject.FindGameObjectWithTag("BlackKing");
+            case "White": return GameObject.FindGameObjectWithTag("WhiteKing");
         }
 
         return null;
     }
 
-    void IsInCheck() {
-        GameObject[] greenSpots = GameObject.FindGameObjectsWithTag("GreenSpot");
+    public List<GameObject> GetTeamObjects() {
+        string enemyTag = currentTurn == "B" ? "W"
+                                             : "B";
 
+        foreach (GameObject obj in allGameObjects) {
+            if (currentTurn != null) {
+
+            }
+        }
+
+        return null;
+    }
+
+    private void Update() {
+        allGameObjects = GameObject.FindObjectsOfType<GameObject>();
     }
 }
 
