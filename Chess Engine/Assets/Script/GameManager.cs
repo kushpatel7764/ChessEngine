@@ -13,8 +13,10 @@ public class GameManager : MonoBehaviour
     Pawn_Placement pawn_Placement;
     GameObject pawnPlacementObject;
 
-    private GameObject[] allGameObjects;
+    [SerializeField] CheckSystem checkSystem;
 
+    private GameObject[] allGameObjects;
+    public GameObject lastChessPieceClicked;
     public GameObject selectedGameObject;
 
     string selectionSpotName = "SelectionSpot";
@@ -93,7 +95,7 @@ public class GameManager : MonoBehaviour
         
         if (Input.GetMouseButtonDown(0)) {
 
-            GameObject lastChessPieceClicked = selectedGameObject;
+            lastChessPieceClicked = selectedGameObject;
             
             if (hitByRay.collider != null) {   // Detect the ray hit a object with a collider
 
@@ -120,7 +122,9 @@ public class GameManager : MonoBehaviour
                     
                     lastChessPieceClicked.transform.position = ColliderhitByRay.transform.position; // Moves the chesspiece to the spot that is clicked
 
-                    pawn_Placement.DestroyGreenSpots(); 
+                    pawn_Placement.DestroyGreenSpots();
+
+
                     GameObject.Find(selectionSpotName).transform.position = new Vector2(20, 20); //Move the selection spot out of the scene
 
                     //Change Turns depending on the starter player. First to move a piece is first and then eveything alternates from there. 

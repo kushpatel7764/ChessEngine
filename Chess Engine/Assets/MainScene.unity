@@ -225,6 +225,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   greenSpotPrefab: {fileID: 284916834088767904, guid: f5eb2db7ae292084bb1bbe3e44fe5f84, type: 3}
+  checkSystem: {fileID: 507836159}
+  lastChessPieceClicked: {fileID: 0}
   selectedGameObject: {fileID: 0}
 --- !u!4 &507836155
 Transform:
@@ -292,12 +294,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 507836153}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7c54c2646d1900041bea99fe526f263d, type: 3}
+  m_Script: {fileID: 11500000, guid: 1dfe6ce830d7dfb40a2590a2878ba336, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpot: {fileID: 284916834088767904, guid: f5eb2db7ae292084bb1bbe3e44fe5f84, type: 3}
+  pawn_Placement: {fileID: 507836156}
   gameManager: {fileID: 507836154}
-  currentlySelectedObject: {fileID: 0}
+  pieceMoved: {fileID: 0}
 --- !u!1 &1378611707
 GameObject:
   m_ObjectHideFlags: 0

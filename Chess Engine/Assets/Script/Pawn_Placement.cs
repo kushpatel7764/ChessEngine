@@ -28,7 +28,10 @@ public class Pawn_Placement : MonoBehaviour
 
     private void CreateGreenSpots(string type, int moves, Vector2 pawnPosition) { // Creates the green Spots for the movement options of the pawn
         if (type == "Black") { // The Black Piece
-            
+
+            GameObject bottomRightPiece = gameManager.LocateChessPieceAt(new Vector3(pawnPosition.x + 1, pawnPosition.y - 1)); //there is a chess piece at bottom right
+            GameObject bottomLeftPiece = gameManager.LocateChessPieceAt(new Vector3(pawnPosition.x - 1, pawnPosition.y - 1)); // there is a chess piece at bottom left
+
             for (var i = 1; i < moves; i++) {
                 
                 if ((gameManager.LocateChessPieceAt(new Vector3(pawnPosition.x, pawnPosition.y - i, 0)) != null) && (gameManager.LocateChessPieceAt(new Vector3(pawnPosition.x, pawnPosition.y - i, 0)).tag.StartsWith("B") == true || gameManager.LocateChessPieceAt(new Vector3(pawnPosition.x, pawnPosition.y - i, 0)).tag.StartsWith("W") == true)) {
@@ -38,20 +41,23 @@ public class Pawn_Placement : MonoBehaviour
                 Instantiate(movementBlock, new Vector2(pawnPosition.x, pawnPosition.y - i), Quaternion.identity); //create the green spots that appear when you click on the pawn
             }
 
-            if (gameManager.LocateChessPieceAt(new Vector3(pawnPosition.x + 1, pawnPosition.y - 1)) != null && !gameManager.LocateChessPieceAt(new Vector3(pawnPosition.x + 1, pawnPosition.y - 1)).tag.StartsWith("B")) { // This is what creates the spots that indicate a kill
-                var redSpot = Instantiate(movementBlock, new Vector3(pawnPosition.x + 1, pawnPosition.y - 1, 0), Quaternion.identity); 
+            if ( bottomRightPiece != null && !bottomRightPiece.tag.StartsWith("B")) {
 
+                var redSpot = Instantiate(movementBlock, new Vector3(pawnPosition.x + 1, pawnPosition.y - 1, 0), Quaternion.identity); 
                 redSpot.GetComponent<SpriteRenderer>().color = Color.red;
             }
-            if (gameManager.LocateChessPieceAt(new Vector3(pawnPosition.x - 1, pawnPosition.y - 1)) != null && !gameManager.LocateChessPieceAt(new Vector3(pawnPosition.x - 1, pawnPosition.y - 1)).tag.StartsWith("B")) { 
+            if (bottomLeftPiece != null && !bottomLeftPiece.tag.StartsWith("B")) { 
+                
                 var redSpot = Instantiate(movementBlock, new Vector3(pawnPosition.x - 1, pawnPosition.y - 1, 0), Quaternion.identity);
-
                 redSpot.GetComponent<SpriteRenderer>().color = Color.red;
             }
         } 
 
         if (type == "White") { // The white pieces
-            
+
+            GameObject topRightPiece = gameManager.LocateChessPieceAt(new Vector3(pawnPosition.x + 1, pawnPosition.y + 1));
+            GameObject topLeftPiece = gameManager.LocateChessPieceAt(new Vector3(pawnPosition.x - 1, pawnPosition.y + 1));
+
             for (var i = 1; i < moves; i++) {
 
                 if ((gameManager.LocateChessPieceAt(new Vector3(pawnPosition.x, pawnPosition.y + i, 0)) != null) && (gameManager.LocateChessPieceAt(new Vector3(pawnPosition.x, pawnPosition.y + i, 0)).tag.StartsWith("B") == true || gameManager.LocateChessPieceAt(new Vector3(pawnPosition.x, pawnPosition.y + i, 0)).tag.StartsWith("W") == true)) {
@@ -61,12 +67,12 @@ public class Pawn_Placement : MonoBehaviour
                 Instantiate(movementBlock, new Vector2(pawnPosition.x, pawnPosition.y + i), Quaternion.identity);
             }
 
-            if ((gameManager.LocateChessPieceAt(new Vector3(pawnPosition.x + 1, pawnPosition.y + 1)) && (gameManager.LocateChessPieceAt(new Vector3(pawnPosition.x + 1, pawnPosition.y + 1)).tag.StartsWith("W") != true))) {
+            if (topRightPiece && !topRightPiece.tag.StartsWith("W")) {
                 var redSpot = Instantiate(movementBlock, new Vector3(pawnPosition.x + 1, pawnPosition.y + 1, 0), Quaternion.identity);
 
                 redSpot.GetComponent<SpriteRenderer>().color = Color.red;
             }
-            if (gameManager.LocateChessPieceAt(new Vector3(pawnPosition.x - 1, pawnPosition.y + 1)) != null && !gameManager.LocateChessPieceAt(new Vector3(pawnPosition.x - 1, pawnPosition.y + 1)).tag.StartsWith("W")) {
+            if (topLeftPiece != null && !topLeftPiece.tag.StartsWith("W")) {
                 var redSpot = Instantiate(movementBlock, new Vector3(pawnPosition.x - 1, pawnPosition.y + 1, 0), Quaternion.identity);
 
                 redSpot.GetComponent<SpriteRenderer>().color = Color.red;

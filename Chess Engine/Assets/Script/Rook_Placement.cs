@@ -38,7 +38,7 @@ public class Rook_Placement : MonoBehaviour
             GameObject blockingPiece = gameManager.LocateChessPieceAt(nextPosition);
 
             if (blockingPiece != null) {
-                print(blockingPiece.tag[0] == rookTag[0]);
+
                 if (blockingPiece.tag[0] == rookTag[0]) break;
 
                 GameObject killSpot = Instantiate(movementSpot, nextPosition, Quaternion.identity);
@@ -54,7 +54,7 @@ public class Rook_Placement : MonoBehaviour
     }
 
     void CreateMovementSpots(List<Vector3> positionsList) {
-        print(positionsList.Count);
+
         foreach (Vector3 position in positionsList) { // loop through every vector3 position inside the four arrays that are created in the MovesArray() Method
             Instantiate(movementSpot, position, Quaternion.identity);
         }
