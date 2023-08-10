@@ -205,6 +205,8 @@ GameObject:
   - component: {fileID: 507836157}
   - component: {fileID: 507836158}
   - component: {fileID: 507836159}
+  - component: {fileID: 507836160}
+  - component: {fileID: 507836161}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -293,13 +295,7 @@ MonoBehaviour:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 507836153}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1dfe6ce830d7dfb40a2590a2878ba336, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pawn_Placement: {fileID: 507836156}
-  gameManager: {fileID: 507836154}
-  pieceMoved: {fileID: 0}
+  m_EditorHideFlags
 --- !u!1 &1378611707
 GameObject:
   m_ObjectHideFlags: 0
