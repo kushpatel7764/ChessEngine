@@ -6,7 +6,11 @@ public class CheckSystem : MonoBehaviour
 {
     GameManager gameManager;
 
-    private GameObject GetKing() {
+    private GameObject GetKing(string type) {
+        switch (type) {
+            case "Black":  print("Type"); break;
+        }
+
         return null;
     }
 
