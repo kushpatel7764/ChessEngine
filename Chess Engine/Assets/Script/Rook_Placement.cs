@@ -9,7 +9,6 @@ public class Rook_Placement : MonoBehaviour
 
     GameObject currentlySelectedObject;
 
-
     private bool IsInMap(Vector3 spotPosition) { // Checks if the position given is inside the board
         return spotPosition.x >= 0 && spotPosition.x <= 7 && spotPosition.y >= 0 && spotPosition.y <= 7;
     }
