@@ -25,7 +25,7 @@ public class CreateBoard : MonoBehaviour
     int heightBoard = 1*8;
     int widthBoard = 1*8;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         
         for (int i = 0; i < heightBoard; i = i + heightPiece ){
