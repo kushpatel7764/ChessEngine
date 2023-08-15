@@ -126,7 +126,7 @@ public class GameManager : MonoBehaviour
 
 
                     GameObject.Find(selectionSpotName).transform.position = new Vector2(20, 20); //Move the selection spot out of the scene
-
+                    
                     //Change Turns depending on the starter player. First to move a piece is first and then eveything alternates from there. 
                     string tagOfClickedPiece = lastChessPieceClicked.tag;
                     if (tagOfClickedPiece[0] == 'B') {
@@ -136,6 +136,9 @@ public class GameManager : MonoBehaviour
                     } else {
                         TurnSystem('W');
                     }
+                    //One turns are switch make sure there is not check
+                    checkSystem.IsInCheck();
+
                 }
             }
         }
