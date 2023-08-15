@@ -16,11 +16,27 @@ public class GameManager : MonoBehaviour
     [SerializeField] CheckSystem checkSystem;
 
     private GameObject[] allGameObjects;
-    public GameObject lastChessPieceClicked;
+    private GameObject lastChessPieceClicked;
     public GameObject selectedGameObject;
 
     string selectionSpotName = "SelectionSpot";
     string greenSpotName = "GreenSpot(Clone)";
+
+    List<Vector2> ReturnNextMoves(GameObject gameObject) {
+        List<Vector2> result = new List<Vector2>();
+        
+        selectedGameObject = gameObject;
+
+        GameObject[] allGreenSpots = GameObject.FindGameObjectsWithTag("GreenSpot");
+
+        foreach (GameObject greenSpot in allGreenSpots) {
+            result.Add(greenSpot.transform.position);
+        }
+
+        selectedGameObject = lastChessPieceClicked;
+        
+        return result;
+    }
 
     public void DestroyGreenSpots() { //Destroys all the green Spots in the scene
         allGameObjects = GameObject.FindObjectsOfType<GameObject>();
@@ -89,6 +105,10 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
+        //Test
+        ReturnNextMoves(GameObject.Find("BPawn3"));
+
+
 
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit2D hitByRay = Physics2D.Raycast(ray.origin, ray.direction);
@@ -118,8 +138,8 @@ public class GameManager : MonoBehaviour
                 }
 
                 if (ColliderhitByRay.name == greenSpotName) {
-                    // If the ray is a greenSpot
-                    
+                    // If the ray hit a greenSpot
+                    ;
                     lastChessPieceClicked.transform.position = ColliderhitByRay.transform.position; // Moves the chesspiece to the spot that is clicked
 
                     pawn_Placement.DestroyGreenSpots();
