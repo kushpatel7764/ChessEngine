@@ -37,10 +37,10 @@ public class CheckSystem : MonoBehaviour
                 if (gObj.tag[0] == 'B'){
                     print(gObj.name + "-----------");
                     //get all the positions that the black piece can goto
-                    List<Vector3> blackPieceSpots = LegalPieceMoves(gObj);
+                    List<Vector2> blackPieceSpots = gameManager.ReturnNextMoves(gObj);
                     //compare the black piece spots with the king's spot to see if he is in check or not
                     foreach (Vector3 spot in blackPieceSpots){
-                        print("(" + spot.x + "," + spot.y + ")" + ":" + "(" + kingPos.x + "," + kingPos.y + ")");
+                        //print("(" + spot.x + "," + spot.y + ")" + ":" + "(" + kingPos.x + "," + kingPos.y + ")");
                         if (spot == kingPos){
                             
                             print("Check");

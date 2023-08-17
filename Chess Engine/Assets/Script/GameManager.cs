@@ -22,7 +22,7 @@ public class GameManager : MonoBehaviour
     string selectionSpotName = "SelectionSpot";
     string greenSpotName = "GreenSpot(Clone)";
 
-    List<Vector2> ReturnNextMoves(GameObject gameObject) {
+    public List<Vector2> ReturnNextMoves(GameObject gameObject) {
         List<Vector2> result = new List<Vector2>();
         
         selectedGameObject = gameObject;
