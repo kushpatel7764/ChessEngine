@@ -84,11 +84,16 @@ public class GameManager : MonoBehaviour
         allGameObjects = GameObject.FindObjectsOfType<GameObject>();
 
         foreach (GameObject obj in allGameObjects) {
-            if (IsChessPiece(obj)) { 
+            if (IsChessPiece(obj)) {
+
                 Vector2 objPos = obj.transform.position;
 
-                if (objPos == location) { 
-                    return obj;
+                if (objPos == location) {
+
+                    if (objPos == location) {
+
+                        return obj;
+                    }
                 }
             }
         }
@@ -96,7 +101,7 @@ public class GameManager : MonoBehaviour
         return null;
     }
 
-    private void Awake() {
+    void Awake() {
         pawnPlacementObject = GameObject.Find("GameManager");
         pawn_Placement = pawnPlacementObject.GetComponent<Pawn_Placement>();
 
@@ -139,28 +144,27 @@ public class GameManager : MonoBehaviour
                     lastChessPieceClicked = ColliderhitByRay.gameObject; 
                 }
 
-                if (ColliderhitByRay.name == greenSpotName) {
-                    // If the ray hit a greenSpot
-                    ;
-                    lastChessPieceClicked.transform.position = ColliderhitByRay.transform.position; // Moves the chesspiece to the spot that is clicked
+                    if (ColliderhitByRay.name == greenSpotName) {
+                        // If the ray hit a greenSpot
+                        ;
+                        lastChessPieceClicked.transform.position = ColliderhitByRay.transform.position; // Moves the chesspiece to the spot that is clicked
 
-                    pawn_Placement.DestroyGreenSpots();
+                        pawn_Placement.DestroyGreenSpots();
 
 
-                    GameObject.Find(selectionSpotName).transform.position = new Vector2(20, 20); //Move the selection spot out of the scene
-                    
-                    //Change Turns depending on the starter player. First to move a piece is first and then eveything alternates from there. 
-                    string tagOfClickedPiece = lastChessPieceClicked.tag;
-                    if (tagOfClickedPiece[0] == 'B') {
-                        //Alternate gets disables so if black moves then black should be the one to be disabled 
-                        TurnSystem('B');
+                        GameObject.Find(selectionSpotName).transform.position = new Vector2(20, 20); //Move the selection spot out of the scene
 
-                    } else {
-                        TurnSystem('W');
-                    }
-                    //One turns are switch make sure there is not check
-                    checkSystem.IsInCheck();
+                        //Change Turns depending on the starter player. First to move a piece is first and then eveything alternates from there. 
+                        string tagOfClickedPiece = lastChessPieceClicked.tag;
+                        if (tagOfClickedPiece[0] == 'B') {
+                            //Alternate gets disables so if black moves then black should be the one to be disabled 
+                            TurnSystem('B');
 
+                        } else {
+                            TurnSystem('W');
+                        }
+                        //One turns are switch make sure there is not check
+                        checkSystem.IsInCheck();
                 }
             }
         }
