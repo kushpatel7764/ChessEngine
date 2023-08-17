@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     public GameObject greenSpotPrefab;
     private GameObject greenSpot;
 
+
     Pawn_Placement pawn_Placement;
     GameObject pawnPlacementObject;
 
@@ -80,12 +81,13 @@ public class GameManager : MonoBehaviour
         } 
     }
 
-    public GameObject LocateChessPieceAt(Vector3 location) {
+    public GameObject LocateChessPieceAt(Vector2 location) {
         allGameObjects = GameObject.FindObjectsOfType<GameObject>();
 
         foreach (GameObject obj in allGameObjects) {
-            if (IsChessPiece(obj)) { 
-                if (obj.transform.position == location) { 
+            if (IsChessPiece(obj)) {
+                Vector2 objPos = obj.transform.position;
+                if (objPos == location) { 
                     return obj;
                 }
             }
