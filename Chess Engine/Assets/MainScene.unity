@@ -207,6 +207,7 @@ GameObject:
   - component: {fileID: 507836159}
   - component: {fileID: 507836161}
   - component: {fileID: 507836160}
+  - component: {fileID: 507836162}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -228,7 +229,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   greenSpotPrefab: {fileID: 284916834088767904, guid: f5eb2db7ae292084bb1bbe3e44fe5f84, type: 3}
   checkSystem: {fileID: 507836159}
-  lastChessPieceClicked: {fileID: 0}
   selectedGameObject: {fileID: 0}
 --- !u!4 &507836155
 Transform:
@@ -327,6 +327,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementSpot: {fileID: 284916834088767904, guid: f5eb2db7ae292084bb1bbe3e44fe5f84, type: 3}
+  gameManager: {fileID: 507836154}
+--- !u!114 &507836162
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 507836153}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6597b185d71b104995f97bd0a3e664d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   gameManager: {fileID: 507836154}
 --- !u!1 &1378611707
 GameObject:

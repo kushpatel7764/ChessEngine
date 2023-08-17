@@ -34,7 +34,7 @@ public class Pawn_Placement : MonoBehaviour
 
             for (var i = 1; i < moves; i++) {
                 
-                if ((gameManager.LocateChessPieceAt(new Vector3(pawnPosition.x, pawnPosition.y - i, 0)) != null) && (gameManager.LocateChessPieceAt(new Vector3(pawnPosition.x, pawnPosition.y - i, 0)).tag.StartsWith("B") == true || gameManager.LocateChessPieceAt(new Vector3(pawnPosition.x, pawnPosition.y - i, 0)).tag.StartsWith("W") == true)) {
+                if ((gameManager.LocateChessPieceAt(new Vector3(pawnPosition.x, pawnPosition.y - i, 0)) != null)) {
                     break;
                 }
 
